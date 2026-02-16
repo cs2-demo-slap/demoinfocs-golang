@@ -199,6 +199,7 @@ There is one caveat however: Beta features - which are marked as such via commen
 - [refrag.gg](https://refrag.gg/) - The world's premier CS2 training tool
 - [esportslab.gg](https://esportslab.gg/) - Building ML/AI tools for professional esports players
 - [scope.gg](https://scope.gg/) - Analytical and advisory service for advanced CS2 players
+- [clutchkings.gg](https://www.clutchkings.gg/) - A project that helps CS2 players create and share gameplay clips easily
 - [PureSkill.gg](https://pureskill.gg/) - An automated coach to help you get better at CS2
 - [cs2lens.com](https://www.cs2lens.com/) - Professional CS2 demo replayer and analysis tool
 - [awpy](https://github.com/pnxenopoulos/awpy) - A wrapper for the Golang parser in Python
