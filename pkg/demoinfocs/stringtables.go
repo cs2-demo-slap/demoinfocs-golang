@@ -466,10 +466,6 @@ func (p *parser) handleStringTables(msg *msg.CDemoStringTables) {
 }
 
 func (p *parser) parseUserInfo(data []byte, playerIndex int) {
-	if _, exists := p.rawPlayers[playerIndex]; exists {
-		return
-	}
-
 	var userInfo msg.CMsgPlayerInfo
 	err := proto.Unmarshal(data, &userInfo)
 	if err != nil {
