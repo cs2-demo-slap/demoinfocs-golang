@@ -328,6 +328,8 @@ func (p *parser) parseStringTable(
 		items = append(items, &stringTableItem{index, key, value})
 	}
 
+	p.poolBitReader(r)
+
 	return items
 }
 
