@@ -81,12 +81,11 @@ var svcMsgCreators = map[msg.SVC_Messages]NetMessageCreator{
 	msg.SVC_Messages_svc_Broadcast_Command:       func() proto.Message { return &msg.CSVCMsg_Broadcast_Command{} },
 	msg.SVC_Messages_svc_HltvFixupOperatorStatus: func() proto.Message { return &msg.CSVCMsg_HltvFixupOperatorStatus{} },
 	msg.SVC_Messages_svc_UserCmds:                func() proto.Message { return &msg.CSVCMsg_UserCommands{} },
+	msg.SVC_Messages_svc_NextMsgPredicted:        func() proto.Message { return &msg.CSVCMsg_NextMsgPredicted{} },
 }
 
 var usrMsgCreators = map[msg.EBaseUserMessages]NetMessageCreator{
 	msg.EBaseUserMessages_UM_AchievementEvent:        func() proto.Message { return &msg.CUserMessageAchievementEvent{} },
-	msg.EBaseUserMessages_UM_CloseCaption:            func() proto.Message { return &msg.CUserMessageCloseCaption{} },
-	msg.EBaseUserMessages_UM_CloseCaptionDirect:      func() proto.Message { return &msg.CUserMessageCloseCaptionDirect{} },
 	msg.EBaseUserMessages_UM_CurrentTimescale:        func() proto.Message { return &msg.CUserMessageCurrentTimescale{} },
 	msg.EBaseUserMessages_UM_DesiredTimescale:        func() proto.Message { return &msg.CUserMessageDesiredTimescale{} },
 	msg.EBaseUserMessages_UM_Fade:                    func() proto.Message { return &msg.CUserMessageFade{} },
@@ -133,15 +132,16 @@ var usrMsgCreators = map[msg.EBaseUserMessages]NetMessageCreator{
 	msg.EBaseUserMessages_UM_ExtraUserData:           func() proto.Message { return &msg.CUserMessage_ExtraUserData{} },
 	msg.EBaseUserMessages_UM_NotifyResponseFound:     func() proto.Message { return &msg.CUserMessage_NotifyResponseFound{} },
 	msg.EBaseUserMessages_UM_PlayResponseConditional: func() proto.Message { return &msg.CUserMessage_PlayResponseConditional{} },
+	msg.EBaseUserMessages_UM_UserSentBugBug:          func() proto.Message { return &msg.CUserMessage_UserSentBugBug{} },
+	msg.EBaseUserMessages_UM_UsageReport:             func() proto.Message { return &msg.CUserMessage_UsageReport{} },
 }
 
 var emCreators = map[msg.EBaseEntityMessages]NetMessageCreator{
-	msg.EBaseEntityMessages_EM_PlayJingle:      func() proto.Message { return &msg.CEntityMessagePlayJingle{} },
-	msg.EBaseEntityMessages_EM_ScreenOverlay:   func() proto.Message { return &msg.CEntityMessageScreenOverlay{} },
-	msg.EBaseEntityMessages_EM_RemoveAllDecals: func() proto.Message { return &msg.CEntityMessageRemoveAllDecals{} },
-	msg.EBaseEntityMessages_EM_PropagateForce:  func() proto.Message { return &msg.CEntityMessagePropagateForce{} },
-	msg.EBaseEntityMessages_EM_DoSpark:         func() proto.Message { return &msg.CEntityMessageDoSpark{} },
-	msg.EBaseEntityMessages_EM_FixAngle:        func() proto.Message { return &msg.CEntityMessageFixAngle{} },
+	msg.EBaseEntityMessages_EM_PlayJingle:     func() proto.Message { return &msg.CEntityMessagePlayJingle{} },
+	msg.EBaseEntityMessages_EM_ScreenOverlay:  func() proto.Message { return &msg.CEntityMessageScreenOverlay{} },
+	msg.EBaseEntityMessages_EM_PropagateForce: func() proto.Message { return &msg.CEntityMessagePropagateForce{} },
+	msg.EBaseEntityMessages_EM_DoSpark:        func() proto.Message { return &msg.CEntityMessageDoSpark{} },
+	msg.EBaseEntityMessages_EM_FixAngle:       func() proto.Message { return &msg.CEntityMessageFixAngle{} },
 }
 
 var gameEventCreators = map[msg.EBaseGameEvents]NetMessageCreator{
@@ -158,12 +158,15 @@ var gameEventCreators = map[msg.EBaseGameEvents]NetMessageCreator{
 	msg.EBaseGameEvents_GE_SosSetSoundEventParams:     func() proto.Message { return &msg.CMsgSosSetSoundEventParams{} },
 	msg.EBaseGameEvents_GE_SosSetLibraryStackFields:   func() proto.Message { return &msg.CMsgSosSetLibraryStackFields{} },
 	msg.EBaseGameEvents_GE_SosStopSoundEventHash:      func() proto.Message { return &msg.CMsgSosStopSoundEventHash{} },
+	msg.EBaseGameEvents_GE_ClothStiffenAnimEvent:      func() proto.Message { return &msg.CMsgClothStiffenAnimEvent{} },
+	msg.EBaseGameEvents_GE_ClothEffectAnimEvent:       func() proto.Message { return &msg.CMsgClothEffectAnimEvent{} },
 }
 
 var csgoGameEventCreators = map[msg.ECsgoGameEvents]NetMessageCreator{
 	msg.ECsgoGameEvents_GE_PlayerAnimEventId: func() proto.Message { return &msg.CMsgTEPlayerAnimEvent{} },
 	msg.ECsgoGameEvents_GE_RadioIconEventId:  func() proto.Message { return &msg.CMsgTERadioIcon{} },
 	msg.ECsgoGameEvents_GE_FireBulletsId:     func() proto.Message { return &msg.CMsgTEFireBullets{} },
+	msg.ECsgoGameEvents_GE_PlayerBulletHitId: func() proto.Message { return &msg.CMsgPlayerBulletHit{} },
 }
 
 var csUsrMsgCreators = map[msg.ECstrike15UserMessages]NetMessageCreator{
@@ -236,6 +239,11 @@ var csUsrMsgCreators = map[msg.ECstrike15UserMessages]NetMessageCreator{
 	msg.ECstrike15UserMessages_CS_UM_CurrentRoundOdds:             func() proto.Message { return &msg.CCSUsrMsg_CurrentRoundOdds{} },
 	msg.ECstrike15UserMessages_CS_UM_DeepStats:                    func() proto.Message { return &msg.CCSUsrMsg_DeepStats{} },
 	msg.ECstrike15UserMessages_CS_UM_ShootInfo:                    func() proto.Message { return &msg.CCSUsrMsg_ShootInfo{} },
+	msg.ECstrike15UserMessages_CS_UM_CounterStrafe:                func() proto.Message { return &msg.CCSUsrMsg_CounterStrafe{} },
+	msg.ECstrike15UserMessages_CS_UM_DamagePrediction:             func() proto.Message { return &msg.CCSUsrMsg_DamagePrediction{} },
+	msg.ECstrike15UserMessages_CS_UM_RecurringMissionSchema:       func() proto.Message { return &msg.CCSUsrMsg_RecurringMissionSchema{} },
+	msg.ECstrike15UserMessages_CS_UM_SendPlayerLoadout:            func() proto.Message { return &msg.CCSUsrMsg_SendPlayerLoadout{} },
+	msg.ECstrike15UserMessages_CS_UM_WeaponMagDrop:                func() proto.Message { return &msg.CCSUsrMsg_WeaponMagDrop{} },
 }
 
 var teCreators = map[msg.ETEProtobufIds]NetMessageCreator{
@@ -267,7 +275,7 @@ var teCreators = map[msg.ETEProtobufIds]NetMessageCreator{
 var bidirectionalMessageCreators = map[msg.Bidirectional_Messages]NetMessageCreator{
 	msg.Bidirectional_Messages_bi_RebroadcastGameEvent: func() proto.Message { return &msg.CBidirMsg_RebroadcastGameEvent{} },
 	msg.Bidirectional_Messages_bi_RebroadcastSource:    func() proto.Message { return &msg.CBidirMsg_RebroadcastSource{} },
-	msg.Bidirectional_Messages_bi_GameEvent:            func() proto.Message { return &msg.CBidirMsg_RebroadcastGameEvent{} },
+	msg.Bidirectional_Messages_bi_GameEvent_DEPRECATED: func() proto.Message { return &msg.CBidirMsg_RebroadcastGameEvent{} },
 	msg.Bidirectional_Messages_bi_PredictionEvent:      func() proto.Message { return &msg.CBidirMsg_PredictionEvent{} },
 }
 
