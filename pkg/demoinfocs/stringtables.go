@@ -53,6 +53,27 @@ func (p *parser) updatePlayerFromRawIfExists(index int, raw common.PlayerInfo) {
 	pl.SteamID64 = raw.XUID
 	pl.IsBot = raw.IsFakePlayer
 
+	// The slot's userinfo can arrive after the controller entity was bound
+	// (slot reused by another player), then the player still carries the
+	// user ID of the slot's previous occupant and game events for the new
+	// user ID resolve to nobody.
+	if raw.UserID != math.MaxUint16 {
+		userID := raw.UserID
+		if userID <= math.MaxUint16 {
+			userID &= 0xff
+		}
+
+		if pl.UserID != userID {
+			if p.gameState.playersByUserID[pl.UserID] == pl {
+				delete(p.gameState.playersByUserID, pl.UserID)
+			}
+
+			pl.UserID = userID
+		}
+
+		p.gameState.playersByUserID[userID] = pl
+	}
+
 	p.gameState.indexPlayerBySteamID(pl)
 
 	if nameChanged {

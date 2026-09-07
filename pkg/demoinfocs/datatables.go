@@ -356,6 +356,12 @@ func (p *parser) getOrCreatePlayer(entityID int, rp *common.PlayerInfo) (isNew b
 		if rp != nil {
 			player = p.gameState.playersByUserID[userID]
 
+			// A player already bound to another live controller belongs to
+			// that controller (stale userinfo of a reused slot), don't rebind it.
+			if player != nil && player.EntityID != 0 && player.EntityID != entityID && p.gameState.playersByEntityID[player.EntityID] == player {
+				player = nil
+			}
+
 			if player == nil {
 				isNew = true
 
