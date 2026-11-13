@@ -1,3 +1,17 @@
+> [!NOTE]
+> **Archived for now (13 November 2026): this branch is no longer used.**
+>
+> `v5-demoslap` carried the patches [DemoSlap](https://demo-slap.net) needed on top of upstream v5:
+> the player slot re-use fix, decryption of encrypted net-messages (upstream #697) and the
+> fixed8/16/32 field decoders for demos recorded after the CS2 update of 11 November 2026 (upstream #767).
+>
+> Upstream v6 contains all of them, and upstream v5 no longer gets tagged releases, so the DemoSlap
+> services (demo-analyzer, 2d-demo-viewer, steam-match-bot) moved to
+> `github.com/markus-wa/demoinfocs-golang/v6` on 13 November 2026 and dropped their `replace` directive.
+>
+> The last tag of this branch is `v5.2.1-demoslap.3`. The branch and its tags stay for reference and as a
+> rollback path; nothing new lands here. `master` only mirrors upstream.
+
 # demoinfocs-golang - CS2 Demo Parser
 
 A blazing fast, feature complete and production ready Go library for parsing and analysing of Counter-Strike 2 and Counter-Strike: Global Offensive (CS:GO) demos (aka replays).
